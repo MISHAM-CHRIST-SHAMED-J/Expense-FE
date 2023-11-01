@@ -25,10 +25,10 @@ import {
   ListItemText,
 } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PeopleIcon from "@mui/icons-material/People";
+import HistoryIcon from "@mui/icons-material/History";
+import SummarizeIcon from "@mui/icons-material/Summarize";
 import BarChartIcon from "@mui/icons-material/BarChart";
-import LayersIcon from "@mui/icons-material/Layers";
+import PaidIcon from "@mui/icons-material/Paid";
 import logo from "../../assets/logo.png";
 
 export const mainListItems = (
@@ -41,27 +41,21 @@ export const mainListItems = (
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <PaidIcon />
       </ListItemIcon>
-      <ListItemText primary="Orders" />
+      <ListItemText primary="Expense" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <PeopleIcon />
+        <HistoryIcon />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <ListItemText primary="History" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <BarChartIcon />
+        <SummarizeIcon />
       </ListItemIcon>
       <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
     </ListItemButton>
   </React.Fragment>
 );
@@ -165,16 +159,16 @@ export default function Dashboard() {
                 alignItems: "center",
               }}
             >
-              {/* <img src={logo} width="50px" alt="" /> */}
+              <img src={logo} width="50px" alt="" />
 
-              <span
+              {/* <span
                 style={{
                   paddingLeft: "10px",
                   fontFamily: "sans-serif",
                 }}
               >
                 Expense Tracker
-              </span>
+              </span> */}
             </Box>
           </Typography>
           <Button variant="contained" color="success">
