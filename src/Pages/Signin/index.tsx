@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props: any) {
   return (
@@ -31,6 +32,7 @@ function Copyright(props: any) {
 }
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     //   event.preventDefault();
     //   const data = new FormData(event.currentTarget);
@@ -38,6 +40,7 @@ export default function SignIn() {
     //     email: data.get("email"),
     //     password: data.get("password"),
     //   });
+    navigate("/Dashboard/Home");
   };
 
   return (
@@ -55,7 +58,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField

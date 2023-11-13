@@ -23,6 +23,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  useMediaQuery,
 } from "@mui/material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import HistoryIcon from "@mui/icons-material/History";
@@ -30,35 +31,7 @@ import SummarizeIcon from "@mui/icons-material/Summarize";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PaidIcon from "@mui/icons-material/Paid";
 import logo from "../../assets/logo.png";
-
-export const mainListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PaidIcon />
-      </ListItemIcon>
-      <ListItemText primary="Expense" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <HistoryIcon />
-      </ListItemIcon>
-      <ListItemText primary="History" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <SummarizeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-  </React.Fragment>
-);
+import { Outlet, useNavigate } from "react-router-dom";
 
 const drawerWidth: number = 240;
 
@@ -112,6 +85,8 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
+  const isMobile = useMediaQuery("(max-width:600px)");
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -161,19 +136,27 @@ export default function Dashboard() {
             >
               <img src={logo} width="50px" alt="" />
 
-              {/* <span
+              <span
                 style={{
                   paddingLeft: "10px",
                   fontFamily: "sans-serif",
                 }}
               >
                 Expense Tracker
-              </span> */}
+              </span>
             </Box>
           </Typography>
-          <Button variant="contained" color="success">
-            login
-          </Button>
+          {isMobile ? null : (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -191,7 +174,61 @@ export default function Dashboard() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
+          <React.Fragment>
+            <ListItemButton
+              onClick={() => {
+                navigate("/Dashboard/Home");
+              }}
+            >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                navigate("/Dashboard/Expense");
+              }}
+            >
+              <ListItemIcon>
+                <PaidIcon />
+              </ListItemIcon>
+              <ListItemText primary="Expense" />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                navigate("/Dashboard/History");
+              }}
+            >
+              <ListItemIcon>
+                <HistoryIcon />
+              </ListItemIcon>
+              <ListItemText primary="History" />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                navigate("/Dashboard/Reports");
+              }}
+            >
+              <ListItemIcon>
+                <SummarizeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Reports" />
+            </ListItemButton>
+
+            {isMobile ? (
+              <ListItemButton
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <ListItemIcon>
+                  <SummarizeIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            ) : null}
+          </React.Fragment>
           {/* <Divider sx={{ my: 1 }} /> */}
         </List>
       </Drawer>
@@ -211,7 +248,7 @@ export default function Dashboard() {
         <Toolbar />
 
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          test
+          <Outlet />
         </Container>
       </Box>
     </Box>
